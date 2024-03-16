@@ -17,20 +17,7 @@ app.json.sort_keys = False
 
 @app.route('/')
 def index():
-    return '''
-    <!DOCTYPE HTML>
-    <html>
-        <head>
-            <meta charset='UTF-8'>
-        </head>
-        <body>
-            <form method='post' enctype='multipart/form-data' action='api/v2'>
-                <input type='file' name='file'>
-                <input type='submit' value='upload'>
-            </form>
-        </body>
-    </html>
-    '''
+    return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
 
 @app.route('/api/v2', methods=['POST'])
 def apiv2():
@@ -40,9 +27,9 @@ def apiv2():
         ret = predict.predict(f'./uploaded/1.jpg')
         os.remove(f'./uploaded/1.jpg')
 
-        return jsonify({'probs': ret})
-
-
+        response = jsonify({'probs': ret})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
 
 @app.route('/api', methods=['POST'])
 def api():
