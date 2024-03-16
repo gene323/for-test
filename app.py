@@ -17,7 +17,7 @@ app.json.sort_keys = False
 
 @app.route('/')
 def index():
-    return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
+    return "Success", 200
 
 @app.route('/api/v2', methods=['POST'])
 def apiv2():
