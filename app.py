@@ -46,6 +46,7 @@ def api():
     
     with open('data.json', 'w') as f:
         json.dump(ret, f)
+
     response = jsonify({'probs': ret})
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
